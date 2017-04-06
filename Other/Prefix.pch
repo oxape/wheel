@@ -1,0 +1,55 @@
+//
+//  Prefix.pch
+//  ygnews
+//
+//  Created by oxape on 2017/2/10.
+//  Copyright © 2017年 oxape. All rights reserved.
+//
+
+#ifndef Prefix_pch
+#define Prefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import "EXTScope.h"
+#endif
+
+#define FZQingKeFont @"FZQKBYSJW--GB1-0"
+
+#define OXPPhoneWidth          ([UIScreen mainScreen].bounds.size.width)
+#define OXPPhoneHeight         ([UIScreen mainScreen].bounds.size.height)
+
+#define OXPScaleWidth(size)       (OXPPhoneWidth * (size) /375.0f)
+#define OXPScaleHeight(size)      (OXPPhoneHeight * (size) /667.0f)
+
+#define OXPFontSize(size)          floor(OXPPhoneWidth * (size) /375.0f)
+//Ratio
+#define OXPViewPadding       8
+#define OXPPixel             (1/[UIScreen mainScreen].scale)
+
+#ifdef DEBUG
+#define NULLSAFE_ENABLED 0
+#endif
+
+//输出
+#ifdef DEBUG
+
+#define OXPLogVerbose(...)   NSLog(__VA_ARGS__)
+#define OXPLogDebug(...)     NSLog(__VA_ARGS__)
+#define OXPLogInfo(...)      NSLog(__VA_ARGS__)
+#define OXPLogWarn(...)      NSLog(__VA_ARGS__)
+#define OXPLogError(...)     NSLog(__VA_ARGS__)
+
+#else
+
+#define OPLogVerbose(...)
+#define OPLogDebug(...)
+#define OPLogInfo(...)
+#define OPLogWarn(...)
+#define OPLogError(...)
+
+#endif
+
+#endif /* Prefix_pch */
