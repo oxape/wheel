@@ -11,5 +11,7 @@
 @interface UIImage (OXPExtension)
 
 + (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size;
+- (UIImage *)tintedGradientImageWithColor:(UIColor *)tintColor;
+- (UIImage *)tintedImageWithColor:(UIColor *)tintColor;
 
 @end
