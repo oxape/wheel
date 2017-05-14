@@ -11,6 +11,7 @@
 
 @interface OXPFIFOQueue ()
 
+@property (nonatomic, strong) dispatch_queue_t executeQueue;
 @property (nonatomic, strong) NSMutableArray *queues;
 @property (nonatomic, strong) dispatch_queue_t barrierQueue;
 
@@ -38,16 +39,23 @@ static OXPFIFOQueue *_defaultQueue = nil;
     return self;
 }
 
+- (instancetype)initWithExecuteQueue:(dispatch_queue_t)executeQueue {
+    if (self = [self init]) {
+        self.executeQueue = executeQueue;
+    }
+    return self;
+}
+
 - (void)executeBlock:(void (^)())block{
     [self executeBlock:block afterDelay:0];
 }
 
 - (void)executeBlock:(void (^)())block afterDelay:(CFTimeInterval)delay {
-    [self executeBlock:block afterDelay:delay inQueue:dispatch_get_main_queue()];
+    [self executeBlock:block afterDelay:delay inQueue:self.executeQueue];
 }
 
 - (void)executeBlock:(void (^)())block afterDelay:(CFTimeInterval)delay inQueue:(dispatch_queue_t)queue {
-    OXPFIFOOperation *operation = [OXPFIFOOperation blockOperationWithBlock:block afterDelay:delay inQueue:queue];
+    OXPFIFOOperation *operation = [OXPFIFOOperation blockOperationWithBlock:block afterDelay:delay inQueue:self.executeQueue];
     [self addOperation:operation];
 }
 

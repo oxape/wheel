@@ -10,6 +10,7 @@
 
 @interface OXPFIFOQueue : NSOperationQueue
 
+@property (nonatomic, strong, readonly) dispatch_queue_t executeQueue;
 + (instancetype)defaultQueue;
 - (void)executeBlock:(void (^)())block;
 - (void)executeBlock:(void (^)())block afterDelay:(CFTimeInterval)delay;
