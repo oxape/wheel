@@ -3,7 +3,7 @@
 //  MJExtensionD1
 //
 //  Created by oxape on 2015/8/8.
-//  Copyright © 2017年 oxape. All rights reserved.
+//  Copyright © 2015年 oxape. All rights reserved.
 //
 
 #import "NSObject+OPDBModel.h"
