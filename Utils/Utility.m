@@ -359,7 +359,6 @@ typedef NS_ENUM(NSInteger, HudTag) {
     }
     [Utility dismissConfirmStatus];
 }
-
 + (NSComparisonResult) compareVersion:(NSString *)version previous:(NSString *)previous {
     NSArray *pcomponents = [version componentsSeparatedByString:@"."];
     NSArray *acomponents = [previous componentsSeparatedByString:@"."];
@@ -369,6 +368,33 @@ typedef NS_ENUM(NSInteger, HudTag) {
         }
         NSInteger pnum = [pcomponents[i] integerValue];
         NSInteger anum = [acomponents[i] integerValue];
+        if (pnum > anum) {
+            return NSOrderedAscending;
+        } else if (pnum < anum) {
+            return NSOrderedDescending;
+        }
+    }
+    if (pcomponents.count == acomponents.count) {
+        return NSOrderedSame;
+    }
+    //这里pcomponents.count < acomponents.count
+    return NSOrderedDescending;
+}
+
++ (NSComparisonResult) compareHexVersion:(NSString *)version previous:(NSString *)previous {
+    NSArray *pcomponents = [version componentsSeparatedByString:@"."];
+    NSArray *acomponents = [previous componentsSeparatedByString:@"."];
+    for (int i=0; i<pcomponents.count; i++) {
+        if (i >= acomponents.count) {
+            return NSOrderedAscending;
+        }
+        NSScanner *scanner;
+        scanner = [NSScanner scannerWithString:pcomponents[i]];
+        unsigned pnum;
+        [scanner scanHexInt:&pnum];
+        scanner = [NSScanner scannerWithString:acomponents[i]];
+        unsigned anum;
+        [scanner scanHexInt:&anum];
         if (pnum > anum) {
             return NSOrderedAscending;
         } else if (pnum < anum) {

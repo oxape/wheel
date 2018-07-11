@@ -24,6 +24,7 @@
 + (NSString *)getIPAddress:(BOOL)preferIPv4;
 + (BOOL) isEnableWIFI;
 + (Reachability *)reachabilityForLocalWIFINotifier;
-+ (NSComparisonResult) compareVersion:(NSString *)version previous:(NSString *)previous;
++ (NSComparisonResult)compareVersion:(NSString *)version previous:(NSString *)previous;
++ (NSComparisonResult) compareHexVersion:(NSString *)version previous:(NSString *)previous;
 
 @end
