@@ -1,14 +1,12 @@
 //
-//  ZMStorageManager.h
-//  BDSClientSample
+//  OXPStorageManager.h
 //
 //  Created by oxape on 2017/12/28.
-//  Copyright © 2017年 zy. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-@interface ZMStorageManager : NSObject
+@interface OXPStorageManager : NSObject
 
 + (instancetype)sharedManager;
 

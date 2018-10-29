@@ -1,16 +1,14 @@
 //
-//  ZMStorageManager.m
-//  BDSClientSample
+//  OXPStorageManager.m
 //
 //  Created by oxape on 2017/12/28.
-//  Copyright © 2017年 zy. All rights reserved.
 //
 
-#import "ZMStorageManager.h"
+#import "OXPStorageManager.h"
 #import <Foundation/Foundation.h>
 #import <DateTools/NSDate+DateTools.h>
 
-@interface ZMStorageManager()
+@interface OXPStorageManager()
 
 @property (nonatomic, strong) NSString *diskCachePath;
 @property (nonatomic, strong) dispatch_queue_t ioQueue;
@@ -18,7 +16,7 @@
 
 @end
 
-@implementation ZMStorageManager
+@implementation OXPStorageManager
 
 + (instancetype)sharedManager {
     static dispatch_once_t once;
@@ -34,21 +32,21 @@
 }
 
 - (nonnull instancetype)initWithNamespace:(nonnull NSString *)ns {
-    NSString *path = [self makeDiskCachePath:ns]; // /var/mobile/Containers/Data/Application/913DBD5F-AD50-450C-9AE7-11D3D8C82E06/Documents/ZMStorageManager
+    NSString *path = [self makeDiskCachePath:ns]; // /var/mobile/Containers/Data/Application/913DBD5F-AD50-450C-9AE7-11D3D8C82E06/Documents/OXPStorageManager
     return [self initWithNamespace:ns diskCacheDirectory:path];
 }
 
 - (nonnull instancetype)initWithNamespace:(nonnull NSString *)ns
                        diskCacheDirectory:(nonnull NSString *)directory {
     if ((self = [super init])) {
-        NSString *fullNamespace = [@"com.oxape.storageManager." stringByAppendingString:ns];// com.oxape.storageManager.ZMStorageManager
+        NSString *fullNamespace = [@"com.oxape.storageManager." stringByAppendingString:ns];// com.oxape.storageManager.OXPStorageManager
         
         // Create IO serial queue
         _ioQueue = dispatch_queue_create("com.oxape.storageManager", DISPATCH_QUEUE_SERIAL);
         
         // Init the disk cache
         if (directory != nil) {
-            _diskCachePath = [directory stringByAppendingPathComponent:fullNamespace]; // /var/mobile/Containers/Data/Application/913DBD5F-AD50-450C-9AE7-11D3D8C82E06/Documents/ZMStorageManager/com.oxape.storageManager.ZMStorageManager
+            _diskCachePath = [directory stringByAppendingPathComponent:fullNamespace]; // /var/mobile/Containers/Data/Application/913DBD5F-AD50-450C-9AE7-11D3D8C82E06/Documents/OXPStorageManager/com.oxape.storageManager.OXPStorageManager
         } else {
             NSString *path = [self makeDiskCachePath:ns];
             _diskCachePath = path;
@@ -76,12 +74,12 @@
 - (NSData *)dataForPath:(NSString *)path {
     NSError *error;
     if (path.length == 0) {
-        ZMLogWarn(@"file path equal nil");
+        OXPLogWarn(@"file path equal nil");
         return nil;
     }
     NSData *data = [NSData dataWithContentsOfFile:[_diskCachePath stringByAppendingPathComponent:path] options:NSDataReadingMappedIfSafe error:&error];
     if (error) {
-        ZMLogWarn(@"dataForPath = %@", error);
+        OXPLogWarn(@"dataForPath = %@", error);
     }
     return data;
 }
@@ -137,7 +135,7 @@
         [_fileManager createFileAtPath:path contents:data attributes:nil];
         dispatch_async(dispatch_get_main_queue(), ^{
             if (completion) {
-                ZMLogVerbose(@"store data to %@", path);
+                OXPLogVerbose(@"store data to %@", path);
                 completion([relativePath stringByAppendingPathComponent:uuid], error);
             }
         });
@@ -165,7 +163,7 @@
         [_fileManager createFileAtPath:absolutePath contents:data attributes:nil];
         dispatch_async(dispatch_get_main_queue(), ^{
             if (completion) {
-                ZMLogVerbose(@"store data to %@", existsPath);
+                OXPLogVerbose(@"store data to %@", existsPath);
                 completion(existsPath, error);
             }
         });
@@ -189,7 +187,7 @@
         [_fileManager copyItemAtPath:file toPath:absolutePath error:&error];
         dispatch_async(dispatch_get_main_queue(), ^{
             if (completion) {
-                ZMLogVerbose(@"store data to %@", absolutePath);
+                OXPLogVerbose(@"store data to %@", absolutePath);
                 completion(relativePath, error);
             }
         });

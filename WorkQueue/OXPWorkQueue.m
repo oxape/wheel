@@ -1,14 +1,12 @@
 //
-//  ZMWorkQueue.m
-//  BDSClientSample
+//  OXPWorkQueue.m
 //
 //  Created by oxape on 2018/1/3.
-//  Copyright © 2018年 zy. All rights reserved.
 //
 
-#import "ZMWorkQueue.h"
+#import "OXPWorkQueue.h"
 
-@implementation ZMWorkQueue
+@implementation OXPWorkQueue
 
 - (instancetype)init {
     self = [super init];

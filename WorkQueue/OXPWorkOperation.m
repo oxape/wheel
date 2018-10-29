@@ -1,37 +1,35 @@
 //
-//  ZYWorkOperation.m
-//  BDSClientSample
+//  OXPWorkOperation.m
 //
 //  Created by oxape on 2018/1/3.
-//  Copyright © 2018年 zy. All rights reserved.
 //
 
-#import "ZMWorkOperation.h"
+#import "OXPWorkOperation.h"
 
-@interface ZMWorkOperation()
+@interface OXPWorkOperation()
 
 @property (nonatomic, assign, getter = isExecuting) BOOL executing;
 @property (nonatomic, assign, getter = isFinished) BOOL finished;
 @property (nonatomic, assign) NSInteger retryTimes;
-@property (nonatomic, copy) zmWorkQueueCancelBlock (^workBlock)(zmWorkQueueNoParamsBlock done, zmWorkQueueNoParamsBlock retry);
+@property (nonatomic, copy) oxpWorkQueueCancelBlock (^workBlock)(oxpWorkQueueNoParamsBlock done, oxpWorkQueueNoParamsBlock retry);
 @property (nonatomic, copy) void (^doneBlock)(void);
 @property (nonatomic, copy) void (^retryBlock)(void);
 @property (nonatomic, copy) void (^cancellBlock)(void);
 
 @end
 
-@implementation ZMWorkOperation
+@implementation OXPWorkOperation
 
 @synthesize executing = _executing;
 @synthesize finished = _finished;
 @synthesize cancelled = _cancelled;
 
-+ (ZMWorkOperation *)operationWithBlock:(zmWorkQueueCancelBlock (^)(zmWorkQueueNoParamsBlock done, zmWorkQueueNoParamsBlock retry))block retryTimes:(NSInteger)retryTimes {
-    ZMWorkOperation *operation = [[ZMWorkOperation alloc] initWithBlock:block retryTimes:(NSInteger)retryTimes];
++ (OXPWorkOperation *)operationWithBlock:(oxpWorkQueueCancelBlock (^)(oxpWorkQueueNoParamsBlock done, oxpWorkQueueNoParamsBlock retry))block retryTimes:(NSInteger)retryTimes {
+    OXPWorkOperation *operation = [[OXPWorkOperation alloc] initWithBlock:block retryTimes:(NSInteger)retryTimes];
     return operation;
 }
 
-- (instancetype)initWithBlock:(zmWorkQueueCancelBlock (^)(zmWorkQueueNoParamsBlock done, zmWorkQueueNoParamsBlock retry))block retryTimes:(NSInteger)retryTimes {
+- (instancetype)initWithBlock:(oxpWorkQueueCancelBlock (^)(oxpWorkQueueNoParamsBlock done, oxpWorkQueueNoParamsBlock retry))block retryTimes:(NSInteger)retryTimes {
     self = [super init];
     if (self) {
         self.workBlock = block;
@@ -68,7 +66,7 @@
     }
 }
 
-- (zmWorkQueueNoParamsBlock)doWork {
+- (oxpWorkQueueNoParamsBlock)doWork {
     return self.workBlock(self.doneBlock, self.retryBlock);
 }
 
