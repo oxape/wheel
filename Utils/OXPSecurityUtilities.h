@@ -1,16 +1,14 @@
 //
-//  ZMSecurityUtilities.h
-//  ZMSpark
+//  OXPSecurityUtilities.h
 //
 //  Created by zm on 2018/1/18.
-//  Copyright © 2018年 Funky. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonCrypto.h>
 
-@interface ZMSecurityUtilities : NSObject
+@interface OXPSecurityUtilities : NSObject
 
 + (NSString *)MD5String:(NSString *)string;
 + (NSString *)MD5Data:(NSData *)data;

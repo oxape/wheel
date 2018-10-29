@@ -1,18 +1,16 @@
 //
-//  ZMSecurityUtilities.m
-//  ZMSpark
+//  OXPSecurityUtilities.m
 //
 //  Created by zm on 2018/1/18.
-//  Copyright © 2018年 Funky. All rights reserved.
 //
 
-#import "ZMSecurityUtilities.h"
+#import "OXPSecurityUtilities.h"
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonCrypto.h>
-#import "ZMPathUtilities.h"
+#import "OXPPathUtilities.h"
 
 
-@implementation ZMSecurityUtilities
+@implementation OXPSecurityUtilities
 
 + (NSString *)MD5String:(NSString *)string {
     const char *cStr = [string UTF8String];
@@ -137,7 +135,7 @@
                                              NULL,
                                              &cryptor);
     if (status != kCCSuccess) {
-        ZMLogError(@"CCCryptorCreate错误");
+        OXPLogError(@"CCCryptorCreate错误");
         return NO;
     }
     
@@ -162,14 +160,14 @@
                             &dataOutMoved);
             free(inBuffer);
             if (status != kCCSuccess) {
-                ZMLogError(@"CCCryptorUpdate错误");
+                OXPLogError(@"CCCryptorUpdate错误");
                 free(outBuffer);
                 return NO;
             }
             NSInteger writedLength = [outFile write:outBuffer maxLength:dataOutMoved];
             free(outBuffer);
             if (writedLength != dataOutMoved) {
-                ZMLogError(@"write错误");
+                OXPLogError(@"write错误");
                 return NO;
             }
         }
@@ -179,14 +177,14 @@
             memset(outBuffer, 0, outBufferSize);
             CCCryptorStatus status = CCCryptorFinal(cryptor, outBuffer, outBufferSize, &dataOutMoved);
             if (status != kCCSuccess) {
-                ZMLogError(@"CCCryptorFinal错误");
+                OXPLogError(@"CCCryptorFinal错误");
                 free(outBuffer);
                 return NO;
             }
             NSInteger writedLength = [outFile write:outBuffer maxLength:dataOutMoved];
             free(outBuffer);
             if (writedLength != dataOutMoved) {
-                ZMLogError(@"write错误");
+                OXPLogError(@"write错误");
                 return NO;
             }
             break;
@@ -211,7 +209,7 @@
                                              NULL,
                                              &cryptor);
     if (status != kCCSuccess) {
-        ZMLogError(@"CCCryptorCreate错误");
+        OXPLogError(@"CCCryptorCreate错误");
         return NO;
     }
     
@@ -236,14 +234,14 @@
                                                      &dataOutMoved);
             free(inBuffer);
             if (status != kCCSuccess) {
-                ZMLogError(@"CCCryptorUpdate错误");
+                OXPLogError(@"CCCryptorUpdate错误");
                 free(outBuffer);
                 return NO;
             }
             NSInteger writedLength = [outFile write:outBuffer maxLength:dataOutMoved];
             free(outBuffer);
             if (writedLength != dataOutMoved) {
-                ZMLogError(@"write错误");
+                OXPLogError(@"write错误");
                 return NO;
             }
         }
@@ -253,14 +251,14 @@
             memset(outBuffer, 0, outBufferSize);
             CCCryptorStatus status = CCCryptorFinal(cryptor, outBuffer, outBufferSize, &dataOutMoved);
             if (status != kCCSuccess) {
-                ZMLogError(@"CCCryptorFinal错误");
+                OXPLogError(@"CCCryptorFinal错误");
                 free(outBuffer);
                 return NO;
             }
             NSInteger writedLength = [outFile write:outBuffer maxLength:dataOutMoved];
             free(outBuffer);
             if (writedLength != dataOutMoved) {
-                ZMLogError(@"write错误");
+                OXPLogError(@"write错误");
                 return NO;
             }
             break;
