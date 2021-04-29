@@ -1,0 +1,44 @@
+[
+    {
+        "systemLanguageCode": "zh-CN",
+        "sdkBaseConfigCode": "zh",
+        "bundlePath": "zh-Hans",
+        "configName": "中文"
+    },
+    {
+        "systemLanguageCode": "zh-TW",
+        "sdkBaseConfigCode": "zh-tw",
+        "bundlePath": "zh-Hant",
+        "configName": "繁体中文"
+    },
+    {
+        "systemLanguageCode": "en-US",
+        "sdkBaseConfigCode": "en",
+        "bundlePath": "en",
+        "configName": "English"
+    },
+    {
+        "systemLanguageCode": "ja-JP",
+        "sdkBaseConfigCode": "ja",
+        "bundlePath": "ja",
+        "configName": "にほんご"
+    },
+    {
+        "systemLanguageCode": "ko-KR",
+        "sdkBaseConfigCode": "ko",
+        "bundlePath": "ko",
+        "configName": "한국어"
+    },
+    {
+        "systemLanguageCode": "th-TH",
+        "sdkBaseConfigCode": "th",
+        "bundlePath": "th",
+        "configName": "ภาษาไทย"
+    },
+    {
+        "systemLanguageCode": "es-ES",
+        "sdkBaseConfigCode": "es",
+        "bundlePath": "es",
+        "configName": "Español"
+    }
+]
